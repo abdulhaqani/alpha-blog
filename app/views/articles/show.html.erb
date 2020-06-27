@@ -7,7 +7,7 @@
         <div class="card-body text-center">
           <blockquote class="blockquote mb-0">
             <div class="card-text text-left"><%= simple_format(@article.description) %></div>
-            <footer class="blockquote-footer"> Abdul Haqani <cite title="Date">
+            <footer class="blockquote-footer"><%= @article.user.username if @article.user %><cite title="Date">
               <%= time_ago_in_words(@article.created_at) %> 
               <small class="font-italic">
               <% if @article.updated_at != @article.created_at %>

@@ -24,6 +24,7 @@
               </cite>
             </footer>
           </blockquote>
+          <% if logged_in? && @article.user == current_user %>
           <button class="btn btn-outline-warning mt-3">
             <%= link_to "edit", edit_article_path(@article), class:
             "text-warning" %>
@@ -32,6 +33,7 @@
             <%= link_to "Delete", article_path(@article), method: :delete,
             class: "text-danger", data: { confirm: "Are you sure?" } %>
           </button>
+          <% end %>
         </div>
       </div>
     </div>

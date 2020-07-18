@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update]
+  before_action :require_user, only: %i[edit update]
+  before_action :req_same_user, only: %i[edit update]
+
   def new
     @user = User.new
   end
@@ -44,5 +47,11 @@ class UsersController < ApplicationController
   end
   def user_params
     params.require(:user).permit(:username, :email, :password)
+  end
+  def req_same_user
+    if current_user != @user
+      flash[:alert] = 'Cannot edit accounts belonging to other bloggers'
+      redirect_to @user
+    end
   end
 end

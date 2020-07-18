@@ -7,4 +7,18 @@ class ApplicationController < ActionController::Base
   def logged_in?
     !!current_user
   end
+
+  def require_user
+    if !logged_in?
+      flash[:alert] = 'You must be logged in to perform that action'
+      redirect_to login_path
+    end
+  end
+
+  def require_same_user
+    if current_user != @article.user
+      flash[:alert] = 'Cannot edit articles belonging to other bloggers'
+      redirect_to @article
+    end
+  end
 end

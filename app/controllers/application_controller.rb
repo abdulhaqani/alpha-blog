@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_same_user
-    return if current_user == @article.user
+    return if current_user == @article.user || current_user.admin?
 
     flash[:alert] = 'Cannot edit articles belonging to other bloggers'
     redirect_to @article

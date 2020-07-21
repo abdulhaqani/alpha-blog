@@ -1,5 +1,7 @@
 <h1 class="text-center mt-4">Alpha Bloggers!</h1>
-
+<div class="flickr_pagination">
+  <%= will_paginate @users, :container => false %>
+</div>
 <% @users.each do |user| %>
 <div class="row justify-content-md-center">
   <div class="col-8">
@@ -17,8 +19,14 @@
         <%= link_to "View profile", user, class:"btn btn-outline-success mt-3"
         %>
         <!-- conditional edit -->
-        <% if logged_in? && user == current_user %> <%= link_to "Edit profile",
-        edit_user_path(user), class:"btn btn-outline-warning mt-3" %> <% end %>
+        <% if logged_in? %> 
+          <% if user == current_user %> 
+            <%= link_to "Edit profile", edit_user_path(user), class:"btn btn-outline-warning mt-3" %>
+          <% end %> 
+          <% if current_user.admin? %> 
+            <%= link_to "Delete user", user, class:"btn btn-outline-danger mt-3", method: :delete, data: {confirm: "Are you sure you want to delete the user account and all associated articles"} %>
+          <% end %> 
+        <% end %> 
         <div class="card-footer text-muted mb-0 mt-4" %>
           <small>Joined <%= time_ago_in_words(user.created_at) %> ago</small>
         </div>
@@ -27,3 +35,7 @@
   </div>
 </div>
 <% end %>
+
+<div class="flickr_pagination mt-4 mb-4">
+  <%= will_paginate @users, :container => false %>
+</div>

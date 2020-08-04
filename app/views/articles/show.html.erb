@@ -6,8 +6,13 @@
         <div class="card-header">
           <div class="text-center mb-1 text-black">
             by <%= @article.user.username if @article.user %>
+            <%= link_to gravatar_for(@article.user), @article.user%>
+            <% if @article.categories.any? %>
+              <div class="mt-2 mr-1">
+                <%= render @article.categories %>
+              </div>
+            <% end %>
           </div>
-          <%= link_to gravatar_for(@article.user), @article.user%>
         </div>
         <div class="card-body text-center">
           <blockquote class="blockquote mb-0">

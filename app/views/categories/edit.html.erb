@@ -1,0 +1,9 @@
+<div class="container">
+  <h1 class="text-center mt-4">Edit category</h1>
+</div>
+<%= render 'shared/errors', obj: @category %>
+<%= render 'form' %>
+  
+<div class="text-center mt-3 mb-3">
+  <%= link_to 'Cancel and return to Category Page', category_path(@category), class: "text-info" %> 
+</div>
